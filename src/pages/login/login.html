@@ -14,15 +14,11 @@
 
 
 <ion-content padding>
-  <button ion-button block color="facebook" (click)="logInWithFacebook()">
-    <ion-icon name="logo-facebook"></ion-icon>
-    <span>Login with Facebook</span>
-  </button>
-  <button ion-button block color="google" (click)="login()">
+  <button ion-button block color="google" (click)="signIn()">
     <ion-icon name="logo-googleplus"></ion-icon>
     <span>Login with Google</span>
   </button>
-  <button ion-button block outline (click)="logout()">
+  <button ion-button block outline (click)="signOut()">
     <ion-icon name="log-out"></ion-icon>
     <span>Log Out</span>
   </button>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {AuthServiceProvider} from "../../providers/auth-service/auth-service";
+import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 
 /**
  * Generated class for the LoginPage page.
@@ -21,16 +21,13 @@ export class LoginPage {
               , private _auth: AuthServiceProvider) {
   }
 
-  login() {
+  signIn() {
     // TODO: 로그인이 되어있지 않은 경우와 그렇지 않은 경우 구분하기
-    this._auth.login();
+    this._auth.googleLogin();
   }
 
-  loginWithFacebook() {
-  }
-
-  logout() {
-    this._auth.logout();
+  signOut() {
+    this._auth.signOut();
   }
 
 
