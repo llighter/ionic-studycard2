@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from "../pages/login/login";
-import { AngularFireAuth } from "angularfire2/auth";
 
 import * as firebase from 'firebase/app';
 import { AuthServiceProvider } from "../providers/auth-service/auth-service";
@@ -27,7 +26,7 @@ export class MyApp {
       splashScreen.hide();
     });
 
-
+    // If user are logged in, Move to HomePage else LoginPage
     this._auth.user.subscribe((user: firebase.User) => {
       if(user) {
         this.rootPage = TabsPage;
