@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { CardDetailPage } from '../pages/card-detail/card-detail';
 
 
 
@@ -28,7 +29,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    CardDetailPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    CardDetailPage
   ],
   providers: [
     StatusBar,
