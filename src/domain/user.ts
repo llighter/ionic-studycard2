@@ -6,5 +6,4 @@ export interface User {
     email: string;
     photoURL?: string;
     displayName?: string;
-    categories?: AngularFirestoreCollection<Category>;
   }
