@@ -5,12 +5,14 @@ import * as firebase from 'firebase/app';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Category } from '../../domain/category';
 import { Observable } from 'rxjs/Observable'
+import { CardDetailPage } from '../card-detail/card-detail';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit{
+  pushPage: any;
 
   // TODO: 인터페이스로 선언한 유저 데이터를 받아오려면 인터페이스를 분리해서
   // 서비스로부터 정보를 받아와야 하는가?
@@ -26,6 +28,8 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
+    this.pushPage = CardDetailPage;
+
     this._auth.user.subscribe((user: firebase.User) => {
       
       if(user) {
