@@ -9,6 +9,21 @@
     Welcome. {{ userName }}
   </ion-item>
 
+  <ion-fab bottom right>
+    <button ion-fab (click)="addCategory()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-item-sliding #item *ngFor="let category of categories | async">
+      <ion-item class="text" [navPush]="pushPage" [navParams]="category">
+        {{ category.categoryName }}
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteCategory(category.categoryId)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
   <button ion-button block outline (click)="signOut()">
     <ion-icon name="log-out"></ion-icon>
     <span>Log Out</span>
