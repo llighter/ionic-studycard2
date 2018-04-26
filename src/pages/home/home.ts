@@ -16,7 +16,7 @@ export class HomePage implements OnInit{
 
   // TODO: 인터페이스로 선언한 유저 데이터를 받아오려면 인터페이스를 분리해서
   // 서비스로부터 정보를 받아와야 하는가?
-  private userName: string; 
+  userName: string; 
   private categoriesCollection: AngularFirestoreCollection<Category>;
   categories: Observable<Category[]>
 

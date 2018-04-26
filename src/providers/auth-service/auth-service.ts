@@ -80,7 +80,11 @@ export class AuthServiceProvider {
   async webGoogleLogin(): Promise<void> {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider);
+      
+      await this.afAuth.auth.signInWithPopup(provider)
+        .then((credential) => {
+          this.updateUserData(credential.user)
+          });
     } catch(err) {
       console.log(err)
     }
