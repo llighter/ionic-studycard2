@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { CardDetailPage } from '../pages/card-detail/card-detail';
 
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { CardDetailPage } from '../pages/card-detail/card-detail';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthServiceProvider
+    AuthServiceProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}
