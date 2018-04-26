@@ -43,35 +43,47 @@
       <button ion-fab (click)="addCard()">
         <ion-icon name="add"></ion-icon>
       </button>
-      <button ion-fab (click)="importFromReserve()">
+      <button ion-fab (click)="importFromReservedStage()">
         <ion-icon ios="ios-battery-charging" md="md-battery-charging"></ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2 class="count">{{stageCount[0]}}/R</ion-col>
+      <ion-col col-2 class="count">{{stageCount[1]}}/30</ion-col>
+      <ion-col col-2 class="count">{{stageCount[2]}}/60</ion-col>
+      <ion-col col-2 class="count">{{stageCount[3]}}/150</ion-col>
+      <ion-col col-2 class="count">{{stageCount[4]}}/240</ion-col>
+      <ion-col col-2 class="count">{{stageCount[5]}}/450</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- TODO: 하나만 조회하는 방식으로 바뀌어야 한다. -->
   <ion-card *ngFor="let card of currentCard | async" (click)="show = !show">
     <ion-card-header>
       {{ card.source }}
     </ion-card-header>
-    <ion-card-content class="card-detail" *ngIf="show">
+    <ion-card-content class="card-detail question" *ngIf="show">
       {{ card.question }}
     </ion-card-content>
     <ion-card-content class="card-detail answer" *ngIf="!show">
       {{ card.answer }}
     </ion-card-content>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4>
-          <button ion-button full color="primary" round block (click)="success(query.$key, query)">Success</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button full color="danger" round block (click)="fail(query.$key, query)">Fail</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button full color="dark" round block (click)="drop(query.$key, query)">Drop</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </ion-card>
+
+  <ion-grid *ngFor="let card of currentCard | async">
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button full color="primary" round block (click)="success(card)">Success</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button full color="danger" round block (click)="fail(card)">Fail</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button full color="dark" round block (click)="drop(card)">Drop</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
