@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -14,7 +14,6 @@ import { Observable } from 'rxjs/Observable';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-card-detail',
   templateUrl: 'card-detail.html',
@@ -22,7 +21,7 @@ import { Observable } from 'rxjs/Observable';
 export class CardDetailPage implements OnInit {
 
   categoryName: string;
-  currentCard: Observable<Card>;
+  currentCard: Observable<Card[]>;
   private currentStageSubject$: BehaviorSubject<number>;
   private categoryDoc: AngularFirestoreDocument<Card>;
   private cardsCollection: AngularFirestoreCollection<Card>;
@@ -64,7 +63,7 @@ export class CardDetailPage implements OnInit {
               ref.where("stage", "==", this.currentStageSubject$.getValue())
                 .orderBy("modifiedDate", "asc")
                 .limit(1)
-            ).valueChanges()
+            ).valueChanges() as Observable<any[]>
         )
 
       }
