@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the CardDetailPage page.
  *
@@ -20,6 +21,8 @@ import 'rxjs/add/operator/switchMap';
 })
 export class CardDetailPage implements OnInit {
 
+  categoryName: string;
+  currentCard: Observable<Card>;
   private currentStageSubject$: BehaviorSubject<number>;
   private categoryDoc: AngularFirestoreDocument<Card>;
   private cardsCollection: AngularFirestoreCollection<Card>;
