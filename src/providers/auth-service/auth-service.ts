@@ -20,16 +20,20 @@ import { Platform } from 'ionic-angular';
 export class AuthServiceProvider {
 
   user: Observable<User>;
-
   constructor(private afAuth: AngularFireAuth
-              , private afs: AngularFirestore
-              , private gplus: GooglePlus
-              , private platform: Platform) {
+    , private afs: AngularFirestore
+    , private gplus: GooglePlus
+    , private platform: Platform) {
+      
+    // TODO: firestore를 사용하는데 계속적으로 써야한다면 auth-service같이 firestore를 분리해야하지 않을까?
+    const firestore = firebase.firestore();
+    const settings = {/* your settings... */ timestampsInSnapshots: true };
+    firestore.settings(settings);
 
     // Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState
       .switchMap(user => {
-        if(user) {
+        if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
         } else {
           return Observable.of(null)
@@ -72,7 +76,7 @@ export class AuthServiceProvider {
       })
 
       return await this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(gplusUser.idToken))
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -80,18 +84,18 @@ export class AuthServiceProvider {
   async webGoogleLogin(): Promise<void> {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      
+
       await this.afAuth.auth.signInWithPopup(provider)
         .then((credential) => {
           this.updateUserData(credential.user)
-          });
-    } catch(err) {
+        });
+    } catch (err) {
       console.log(err)
     }
   }
 
   googleLogin() {
-    if(this.platform.is('cordova')) {
+    if (this.platform.is('cordova')) {
       this.nativeGoogleLogin();
     } else {
       this.webGoogleLogin();

@@ -33,6 +33,11 @@ export class CardDetailPage implements OnInit {
     , private _auth: AuthServiceProvider
     , public alertCtrl: AlertController
     , private afs: AngularFirestore) {
+
+    // TODO: firestore를 사용하는데 계속적으로 써야한다면 auth-service같이 firestore를 분리해야하지 않을까?
+    const firestore = firebase.firestore();
+    const settings = {/* your settings... */ timestampsInSnapshots: true };
+    firestore.settings(settings);
   }
 
   ngOnInit(): void {

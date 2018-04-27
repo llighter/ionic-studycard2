@@ -11,28 +11,33 @@ import { CardDetailPage } from '../card-detail/card-detail';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
   pushPage: any;
 
   // TODO: 인터페이스로 선언한 유저 데이터를 받아오려면 인터페이스를 분리해서
   // 서비스로부터 정보를 받아와야 하는가?
-  userName: string; 
+  userName: string;
   private categoriesCollection: AngularFirestoreCollection<Category>;
   categories: Observable<Category[]>
 
 
   constructor(public navCtrl: NavController
-              , private _auth: AuthServiceProvider
-              , private afs: AngularFirestore
-              , public alertCtrl: AlertController) {  
+    , private _auth: AuthServiceProvider
+    , private afs: AngularFirestore
+    , public alertCtrl: AlertController) {
+
+    // TODO: firestore를 사용하는데 계속적으로 써야한다면 auth-service같이 firestore를 분리해야하지 않을까?
+    const firestore = firebase.firestore();
+    const settings = {/* your settings... */ timestampsInSnapshots: true };
+    firestore.settings(settings);
   }
 
   ngOnInit(): void {
     this.pushPage = CardDetailPage;
 
     this._auth.user.subscribe((user: firebase.User) => {
-      
-      if(user) {
+
+      if (user) {
         this.userName = user.displayName;
         this.categoriesCollection = this.afs.collection<Category>(`users/${user.uid}/categories`);
         // .valueChanges() is simple. It just returns the 
@@ -42,8 +47,8 @@ export class HomePage implements OnInit{
         // method below for how to persist the id with
         // valueChanges()
         this.categories = this.categoriesCollection.valueChanges();
-        
-        
+
+
       } else {
         this.userName = `Not logged in`;
       }
@@ -52,7 +57,7 @@ export class HomePage implements OnInit{
     })
   }
 
-  addCategory():void {
+  addCategory(): void {
     let prompt = this.alertCtrl.create({
       title: 'New Category',
       message: "Enter a name for this new category you're so want to make",
@@ -73,7 +78,7 @@ export class HomePage implements OnInit{
           text: 'Save',
           handler: data => {
             const id = this.afs.createId();
-            const category: Category = { 
+            const category: Category = {
               categoryId: id,
               categoryName: data.categoryName,
               createdDate: new Date()
