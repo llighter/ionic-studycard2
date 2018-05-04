@@ -41,7 +41,6 @@ export class CardDetailPage implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(`[card-detail]${JSON.stringify(this.navParams)}`);
     this.categoryName = this.navParams.get('categoryName');
     this.currentStageSubject$ = new BehaviorSubject(1);
 
@@ -57,7 +56,7 @@ export class CardDetailPage implements OnInit {
           .collection('cardDeck');
 
         // this.currentCard = this.categoryDoc
-        //   .collection('cardDeck', ref => 
+        //   .collection('cardDeck', ref =>
         //     ref.where("stage", "==", this.currentStageSubject$.getValue())
         //       .orderBy("modifiedDate", "asc")
         //       .limit(1)
@@ -73,9 +72,12 @@ export class CardDetailPage implements OnInit {
             ).valueChanges() as Observable<any[]>
         )
 
-        this.cardsCollection.valueChanges().subscribe(data => {
-          this.updateStageCount();
-        })
+        this.updateStageCount();
+
+        // TODO: 값이 변할 때마다 호출하도록 했더니 의도치 않게 중복으로 실행되는 경우가 생긴다.
+        // this.cardsCollection.valueChanges().subscribe(data => {
+        //   this.updateStageCount();
+        // })
       }
     })
   }
@@ -84,6 +86,7 @@ export class CardDetailPage implements OnInit {
     console.log(`[*] Updating stageCount array...`);
     this.stageCount.forEach((stage, index) => {
       this.cardsCollection.ref.where("stage", "==", index).get().then(querySnapshot => {
+        console.log(`index:${index}---querysnapshot.size:${querySnapshot.size}`);
         this.stageCount[index] = querySnapshot.size;
       })
     });
@@ -141,6 +144,7 @@ export class CardDetailPage implements OnInit {
 
     this.cardsCollection.doc(id).set(card).then(() => {
       console.log(`[+] New card inserted to Firestore..`);
+      this.updateStageCount();
     })
   }
 
@@ -185,6 +189,7 @@ export class CardDetailPage implements OnInit {
 
         this.cardsCollection.doc(card.cardID).update(card).then(() => {
           console.log(`[>>] Current card is updated to next stage :-D`);
+          this.updateStageCount();
         })
 
       } else {
@@ -219,6 +224,7 @@ export class CardDetailPage implements OnInit {
 
       this.cardsCollection.doc(card.cardID).update(card).then(() => {
         console.log(`[<<] Current card is updated to first stage :-)`);
+        this.updateStageCount();
       })
     }
 
@@ -229,6 +235,7 @@ export class CardDetailPage implements OnInit {
   drop(card: Card) {
     this.cardsCollection.doc(card.cardID).delete().then(() => {
       console.log(`[-] Current card is deleted from the card deck :-(`);
+      this.updateStageCount();
     })
 
     // TODO: (개선)카드 앞면으로 초기화
@@ -283,6 +290,7 @@ export class CardDetailPage implements OnInit {
           card.modifiedDate = new Date();
 
           this.cardsCollection.doc(card.cardID).update(card);
+          this.updateStageCount();
         })
       })
 
