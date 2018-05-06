@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <div padding>
-    <ion-segment [(ngModel)]="currentSegment">
+    <ion-segment>
       <!-- TODO: apply *ngFor -->
       <ion-segment-button value="stage1" (ionSelect)="filterByStage(1)">
         1
@@ -61,8 +61,8 @@
   </ion-grid>
 
   <!-- TODO: 하나만 조회하는 방식으로 바뀌어야 한다. -->
-  <ion-card *ngFor="let card of currentCard | async" (click)="show = !show">
-    <ion-card-header>
+  <ion-card class="study-card" *ngFor="let card of currentCard | async" (click)="show = !show">
+    <ion-card-header class="source">
       {{ card.source }}
     </ion-card-header>
     <ion-card-content class="card-detail question" *ngIf="show">

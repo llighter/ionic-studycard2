@@ -24,7 +24,7 @@ export class CardDetailPage implements OnInit {
   show: boolean = true;
   stageCount: number[] = [0, 0, 0, 0, 0, 0];
   currentCard: Observable<Card[]>;
-  private currentStageSubject$: BehaviorSubject<number>;
+  public currentStageSubject$: BehaviorSubject<number>;
   private categoryDoc: AngularFirestoreDocument<Card>;
   private cardsCollection: AngularFirestoreCollection<Card>;
 
