@@ -139,6 +139,7 @@ export class CardDetailPage implements OnInit {
       source: data.source,
       repetition: 0,
       stage: 0,
+      createdDate: new Date(),
       modifiedDate: new Date()
     }
 
