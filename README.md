@@ -47,6 +47,10 @@ ionic lab
 
 ## Preview
 
-![image](https://raw.githubusercontent.com/llighter/ionic-studycard2/master/images/login-add-category.gif)
+#### Login, Add Category 
 
-![image](https://raw.githubusercontent.com/llighter/ionic-studycard2/master/images/add-card.gif)
+![image](https://github.com/llighter/ionic-studycard2/blob/master/images/login-add-catetory.gif)
+
+#### Add Card
+
+![image](https://github.com/llighter/ionic-studycard2/blob/master/images/add-card.gif)
