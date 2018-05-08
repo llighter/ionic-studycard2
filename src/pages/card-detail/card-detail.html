@@ -75,14 +75,17 @@
 
   <ion-grid *ngFor="let card of currentCard | async">
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-3>
         <button ion-button full color="primary" round block (click)="success(card)">Success</button>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-3>
         <button ion-button full color="danger" round block (click)="fail(card)">Fail</button>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-3>
         <button ion-button full color="dark" round block (click)="drop(card)">Drop</button>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full color="secondary" round block (click)="edit(card)">Edit</button>
       </ion-col>
     </ion-row>
   </ion-grid>

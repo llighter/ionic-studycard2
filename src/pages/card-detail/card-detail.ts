@@ -243,6 +243,16 @@ export class CardDetailPage implements OnInit {
     this.show = true;
   }
 
+  edit(card: Card) {
+    // this.cardsCollection.doc(card.cardID).delete().then(() => {
+    //   console.log(`[-] Current card is deleted from the card deck :-(`);
+    //   this.updateStageCount();
+    // })
+
+    // // TODO: (개선)카드 앞면으로 초기화
+    // this.show = true;
+  }
+
   importFromReservedStage(): void {
     let alert = this.alertCtrl.create({
       title: '# of card is too low',
